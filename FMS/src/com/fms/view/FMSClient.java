@@ -7,6 +7,8 @@ import com.fms.model.facility.Building;
 import com.fms.model.facility.Phone;
 import com.fms.model.facility.Room;
 import com.fms.model.facility.service.FacilityService;
+import com.fms.model.inspection.Inspection;
+import com.fms.model.inspection.service.InspectionService;
 import com.fms.model.user.User;
 import com.fms.model.user.service.UserService;
 
@@ -15,15 +17,24 @@ public class FMSClient {
 	public static void main(String[] args) {
 		System.out.println("Facility creation started");
 		
-		//String facilityID="FA001";
-		//String phoneID1="PH001";
-		//String phoneID2="PH002";
-		//String roomID1="RM001";
-		//String roomID2="RM002";
+		String facilityID="FA001";
+		String phoneID1="PH001";
+		String phoneID2="PH002";
+		String roomID1="RM001";
+		String roomID2="RM002";
 		
 		//addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2);
+		
+		//Making a new user
 		String userID="USR1";
-		addUser(userID);
+		//addUser(userID);
+		
+		//Adding a new inpsection
+		String inspectionID="IN1";
+		addInspection(inspectionID,userID,facilityID);
+		
+		
+		
 		
 		
 
@@ -102,6 +113,25 @@ public class FMSClient {
 		
 		UserService userService=new UserService();
 		userService.addUser(user);
+		
+	}
+	
+	private static void addInspection(String inspectionID, String userID, String facilityID) {
+		Set<Inspection> inspections=new HashSet<>();
+		
+		Inspection inspection=new Inspection();
+		
+		inspection.setInspectionID(inspectionID);
+		inspection.setDateFrom("2019/04/03");
+		inspection.setDateTo("2019/04/10");
+		inspection.setUserID(userID);
+		inspection.setFacilityID(facilityID);
+		inspection.setInspectionType("room");
+		
+		inspections.add(inspection);
+		
+		InspectionService iService=new InspectionService();
+		iService.addInspections(inspections);
 		
 	}
 
