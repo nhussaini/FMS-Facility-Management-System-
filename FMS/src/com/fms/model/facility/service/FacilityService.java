@@ -15,5 +15,17 @@ public class FacilityService {
 		    }
 			return null;// why is this return null here?
 	}
+	
+	//Romve a building facility
+	public String removeFacility(String facilityID) {
+		try {
+			buildingDAO.deleteBuilding(facilityID);
+			return "Ok";
+		} catch (Exception se) {
+		      System.err.println("FacilityService: Threw a Exception deleting a Facility.");
+		      System.err.println(se.getMessage());
+		    }
+		return null;
+	}
 
 }

@@ -56,6 +56,30 @@ public class BuildingDAO {
 			}
 		 return building;
 	 }
+	 
+	 //Remove a facility
+	 public void deleteBuilding(String fid) {
+		 Connection connection=DBConnect.getDatabaseConnection();
+		 
+		 try {
+			 Statement deleteStatement=connection.createStatement();
+			 
+			 phoneDAO.deletePhone(fid);
+			 roomDAO.deleteRooms(fid);
+			 
+			 String deleteQuery="DELETE FROM building WHERE FacilityID='"+fid+"'";
+			 deleteStatement.executeUpdate(deleteQuery);
+		 }catch(SQLException se) {
+				se.printStackTrace();
+			}finally {
+				if(connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {}
+				}
+			}
+		 
+	 }
 	
 
 }

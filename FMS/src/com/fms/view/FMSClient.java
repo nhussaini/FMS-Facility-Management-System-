@@ -81,6 +81,8 @@ public class FMSClient {
 		
 		System.out.println("Facility data inserted successfully");
 		
+		System.out.println("the building is successfully removed? "+fService.removeFacility("FA0001"));
+		
 		
 		
 		
