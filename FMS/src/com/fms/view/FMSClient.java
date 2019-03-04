@@ -7,19 +7,24 @@ import com.fms.model.facility.Building;
 import com.fms.model.facility.Phone;
 import com.fms.model.facility.Room;
 import com.fms.model.facility.service.FacilityService;
+import com.fms.model.user.User;
+import com.fms.model.user.service.UserService;
 
 public class FMSClient {
 
 	public static void main(String[] args) {
 		System.out.println("Facility creation started");
 		
-		String facilityID="FA001";
-		String phoneID1="PH001";
-		String phoneID2="PH002";
-		String roomID1="RM001";
-		String roomID2="RM002";
+		//String facilityID="FA001";
+		//String phoneID1="PH001";
+		//String phoneID2="PH002";
+		//String roomID1="RM001";
+		//String roomID2="RM002";
 		
-		addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2);
+		//addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2);
+		String userID="USR1";
+		addUser(userID);
+		
 		
 
 	}
@@ -82,10 +87,21 @@ public class FMSClient {
 		System.out.println("Facility data inserted successfully");
 		
 		System.out.println("the building is successfully removed? "+fService.removeFacility("FA0001"));
+			
+	}
+	
+	private static void addUser(String userID) {
+		System.out.println("Adding a new user");
+		User user=new User();
 		
+		user.setUserID(userID);
+		user.setName("Nasr");
+		user.setPhoneNumber("12345");
+		user.setAddress("1219 W Columbia Ave");
+		user.setTypeOfUser("Employee");
 		
-		
-		
+		UserService userService=new UserService();
+		userService.addUser(user);
 		
 	}
 
