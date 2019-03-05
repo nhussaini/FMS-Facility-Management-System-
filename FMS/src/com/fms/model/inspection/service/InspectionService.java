@@ -16,5 +16,15 @@ public class InspectionService {
 		      System.err.println(se.getMessage());
 		}
 	}
-
+	
+	public Set<Inspection> listInspections(){
+		try {
+			Set<Inspection> inspections=inspectionDAO.getBuildingInspections();
+			return inspections;
+		}catch(Exception se){
+			 System.err.println("InspectionService: Threw a Exception retrieving Facility Inspections.");
+		      System.err.println(se.getMessage());
+	}
+	return null;	
+	}
 }

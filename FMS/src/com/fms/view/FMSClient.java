@@ -30,7 +30,7 @@ public class FMSClient {
 		//addUser(userID);
 		
 		//Adding a new inpsection
-		String inspectionID="IN1";
+		String inspectionID="IN2";
 		addInspection(inspectionID,userID,facilityID);
 		
 		
@@ -122,16 +122,25 @@ public class FMSClient {
 		Inspection inspection=new Inspection();
 		
 		inspection.setInspectionID(inspectionID);
-		inspection.setDateFrom("2019/04/03");
-		inspection.setDateTo("2019/04/10");
+		inspection.setDateFrom("2019/04/04");
+		inspection.setDateTo("2019/04/11");
 		inspection.setUserID(userID);
 		inspection.setFacilityID(facilityID);
-		inspection.setInspectionType("room");
+		inspection.setInspectionType("bathroom");
 		
 		inspections.add(inspection);
 		
 		InspectionService iService=new InspectionService();
 		iService.addInspections(inspections);
+		System.out.println("inspection added");
+		
+		//List inspections
+		System.out.println("list of inspections: ");
+		Set<Inspection> listinspections=iService.listInspections();
+		for(Inspection i:listinspections) {
+			System.out.println("InspectionID: "+i.getInspectionID());
+			System.out.println("InpsectionType: "+i.getInspectionType());
+		}
 		
 	}
 
