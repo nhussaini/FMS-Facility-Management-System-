@@ -3,12 +3,15 @@ package com.fms.view;
 import java.util.HashSet;
 import java.util.Set;
 
+
 import com.fms.model.facility.Building;
 import com.fms.model.facility.Phone;
 import com.fms.model.facility.Room;
 import com.fms.model.facility.service.FacilityService;
 import com.fms.model.inspection.Inspection;
 import com.fms.model.inspection.service.InspectionService;
+import com.fms.model.maintenance.MaintenanceRequest;
+import com.fms.model.maintenance.service.MaintenanceService;
 import com.fms.model.reserveuse.InUse;
 import com.fms.model.reserveuse.Reserve;
 import com.fms.model.reserveuse.service.ReserveuseService;
@@ -41,6 +44,11 @@ public class FMSClient {
 		String usageID="US1";
 		
 		addReservationUse(reserveID,userID,roomID2,usageID);
+		
+		//Adding maintenanceRequest
+		String requestID="MR1";
+		
+		Set<MaintenanceRequest> reqsts = addMainReq(requestID, userID, roomID2);
 		
 		
 		
@@ -186,6 +194,32 @@ public class FMSClient {
 		
 		System.out.println("facility vacated");
 		ruService.vacateFacility(roomID2);
+		
+	}
+	
+	public static Set<MaintenanceRequest> addMainReq(String requestID, String userID, String roomID2){
+		
+		MaintenanceRequest request=new MaintenanceRequest();
+		
+		Set<MaintenanceRequest> requests=new HashSet<>();
+		
+		request.setRequestID(requestID);
+		request.setDescription("bathroom shower");
+		request.setRequestDate("2019/03/06");
+		request.setUserID(userID);
+		request.setRoomID(roomID2);
+		
+		requests.add(request);
+		
+		MaintenanceService mService=new MaintenanceService();
+		mService.addMaintenanceRequest(request);
+		
+		System.out.println("MaintenanceRequest added");
+		return requests;
+		
+		
+		
+		
 		
 	}
 
