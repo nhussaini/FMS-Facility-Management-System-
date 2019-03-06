@@ -29,5 +29,39 @@ public class ReserveuseService {
 		      System.err.println(se.getMessage());
 		}
 	}
+	
+	public int getFacilityIntervalUsage(String rid) {
+		try {
+			return inUseDAO.getFacilityIntervalUsage(rid);
+		} catch (Exception se) {
+		      System.err.println("FacilityintervalUsageService: Threw a Exception retrieving Facility Interval Usage.");
+		      System.err.println(se.getMessage());
+		    }
+		return 0;
+	}
+	
+	//List actual facility usage
+	public InUse getActualFacilityUsage(String rid) {
+		try {
+			InUse inUse=inUseDAO.getActualFacilityUsage(rid);
+			return inUse;
+		} catch (Exception se) {
+		      System.err.println("FacilityActualUsageService: Threw a Exception retrieving Actual Facility Usage.");
+		      System.err.println(se.getMessage());
+		    }
+		return null;
+	}
+	
+	//Vacate Facility
+	public void vacateFacility(String rid) {
+		try {
+			inUseDAO.vacateFacility(rid);
+			reserveDAO.cancelReservation(rid);
+		} catch (Exception se) {
+		      System.err.println("VacateFacilityService: Threw a Exception retrieving Vacate Facility.");
+		      System.err.println(se.getMessage());
+		    }
+	}
+	
 
 }

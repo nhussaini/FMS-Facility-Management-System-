@@ -155,28 +155,37 @@ public class FMSClient {
 	
 	//Adding a reservation
 	private static void addReservationUse(String reserveID,String userID,String roomID2,String usageID) {
-		Reserve reserve=new Reserve();
+		//Reserve reserve=new Reserve();
 		
-		reserve.setReserveID(reserveID);
-		reserve.setDateFrom("2019/04/05");
-		reserve.setDateTo("2019/04/10");
-		reserve.setUserID(userID);
-		reserve.setRoomID(roomID2);
-		reserve.setrStatus("reserved");
+		//reserve.setReserveID(reserveID);
+		//reserve.setDateFrom("2019/04/05");
+		//reserve.setDateTo("2019/04/10");
+		//reserve.setUserID(userID);
+		//reserve.setRoomID(roomID2);
+		//reserve.setrStatus("reserved");
 		
 		ReserveuseService ruService=new ReserveuseService();
-		ruService.addReservation(reserve);
+		//ruService.addReservation(reserve);
 		
-		InUse inUse=new InUse();
+		//InUse inUse=new InUse();
 		
-		inUse.setUsageID(usageID);
-		inUse.setReserveID(reserveID);
-		inUse.setRoomID(roomID2);
-		inUse.setUserID(userID);
-		inUse.setrStatus("occupied");
-		inUse.setUsedInInterval(0);
-		ruService.assingFacilityToUse(inUse);
-		System.out.println("Reserve and Use happened");
+		//inUse.setUsageID(usageID);
+		//inUse.setReserveID(reserveID);
+		//inUse.setRoomID(roomID2);
+		//inUse.setUserID(userID);
+		//inUse.setrStatus("occupied");
+		//inUse.setUsedInInterval(0);
+		//ruService.assingFacilityToUse(inUse);
+		//System.out.println("Reserve and Use happened");
+		
+		System.out.println("Facility Used In Interval: 0-false 1-true ");
+		System.out.println(ruService.getFacilityIntervalUsage(roomID2));
+		
+		System.out.println("Facility Actual Usage: UsageIS's ");
+		System.out.println(ruService.getActualFacilityUsage(roomID2).getUsageID());
+		
+		System.out.println("facility vacated");
+		ruService.vacateFacility(roomID2);
 		
 	}
 
