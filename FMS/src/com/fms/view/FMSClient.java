@@ -9,6 +9,9 @@ import com.fms.model.facility.Room;
 import com.fms.model.facility.service.FacilityService;
 import com.fms.model.inspection.Inspection;
 import com.fms.model.inspection.service.InspectionService;
+import com.fms.model.reserveuse.InUse;
+import com.fms.model.reserveuse.Reserve;
+import com.fms.model.reserveuse.service.ReserveuseService;
 import com.fms.model.user.User;
 import com.fms.model.user.service.UserService;
 
@@ -31,7 +34,13 @@ public class FMSClient {
 		
 		//Adding a new inpsection
 		String inspectionID="IN2";
-		addInspection(inspectionID,userID,facilityID);
+		//addInspection(inspectionID,userID,facilityID);
+		
+		//Adding Reservation
+		String reserveID="RE1";
+		String usageID="US1";
+		
+		addReservationUse(reserveID,userID,roomID2,usageID);
 		
 		
 		
@@ -141,6 +150,33 @@ public class FMSClient {
 			System.out.println("InspectionID: "+i.getInspectionID());
 			System.out.println("InpsectionType: "+i.getInspectionType());
 		}
+		
+	}
+	
+	//Adding a reservation
+	private static void addReservationUse(String reserveID,String userID,String roomID2,String usageID) {
+		Reserve reserve=new Reserve();
+		
+		reserve.setReserveID(reserveID);
+		reserve.setDateFrom("2019/04/05");
+		reserve.setDateTo("2019/04/10");
+		reserve.setUserID(userID);
+		reserve.setRoomID(roomID2);
+		reserve.setrStatus("reserved");
+		
+		ReserveuseService ruService=new ReserveuseService();
+		ruService.addReservation(reserve);
+		
+		InUse inUse=new InUse();
+		
+		inUse.setUsageID(usageID);
+		inUse.setReserveID(reserveID);
+		inUse.setRoomID(roomID2);
+		inUse.setUserID(userID);
+		inUse.setrStatus("occupied");
+		inUse.setUsedInInterval(0);
+		ruService.assingFacilityToUse(inUse);
+		System.out.println("Reserve and Use happened");
 		
 	}
 
