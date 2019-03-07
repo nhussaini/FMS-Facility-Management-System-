@@ -12,6 +12,7 @@ import com.fms.model.inspection.Inspection;
 import com.fms.model.inspection.service.InspectionService;
 import com.fms.model.maintenance.MaintenanceOrder;
 import com.fms.model.maintenance.MaintenanceRequest;
+import com.fms.model.maintenance.MaintenanceSchedule;
 import com.fms.model.maintenance.service.MaintenanceService;
 import com.fms.model.reserveuse.InUse;
 import com.fms.model.reserveuse.Reserve;
@@ -53,7 +54,13 @@ public class FMSClient {
 		
 		//Adding maintenance Order
 		String morderID="MO1";
-		addMaintOrder(morderID, reqsts);
+		//addMaintOrder(morderID, reqsts);
+		
+		//add a maintenance schedule
+		String scheduleID="SC1";
+		
+		addmaintSchedule(scheduleID,morderID);
+		
 		
 		
 		
@@ -236,6 +243,23 @@ public class FMSClient {
 		for(MaintenanceRequest r:requests) {
 			mService.UpdateRequest(r.getRequestID(),morderID);
 		}
+		
+	}
+	
+	//adding maintenance schedule
+	public static void addmaintSchedule(String scheduleID, String morderID) {
+		
+		MaintenanceSchedule schedule=new MaintenanceSchedule();
+		
+		schedule.setScheduleID(scheduleID);
+		schedule.setDateFrom("2019/03/07");
+		schedule.setDateTo("2019/03/08");
+		schedule.setMorderID(morderID);
+		
+		MaintenanceService mService=new MaintenanceService();
+		mService.insertMaintenanceSchedule(schedule);
+		
+		
 		
 	}
 
