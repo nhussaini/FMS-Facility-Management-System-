@@ -10,6 +10,7 @@ import com.fms.model.facility.Room;
 import com.fms.model.facility.service.FacilityService;
 import com.fms.model.inspection.Inspection;
 import com.fms.model.inspection.service.InspectionService;
+import com.fms.model.maintenance.Maintenance;
 import com.fms.model.maintenance.MaintenanceOrder;
 import com.fms.model.maintenance.MaintenanceRequest;
 import com.fms.model.maintenance.MaintenanceSchedule;
@@ -59,7 +60,12 @@ public class FMSClient {
 		//add a maintenance schedule
 		String scheduleID="SC1";
 		
-		addmaintSchedule(scheduleID,morderID);
+		//addmaintSchedule(scheduleID,morderID);
+		
+		//Add a maintenance
+		String maintenanceID="MN1";
+		
+		addMaintenace(maintenanceID, morderID, scheduleID);
 		
 		
 		
@@ -257,9 +263,29 @@ public class FMSClient {
 		schedule.setMorderID(morderID);
 		
 		MaintenanceService mService=new MaintenanceService();
-		mService.insertMaintenanceSchedule(schedule);
+		mService.addMaintenanceSchedule(schedule);
 		
 		
+		
+	}
+	
+	//adding a maintenance
+	public static void addMaintenace(String maintenanceID, String morderID, String scheduleID) {
+		
+		Maintenance maintenance=new Maintenance();
+		
+		maintenance.setMaintenanceID(maintenanceID);
+		maintenance.setType("Engineering");
+		maintenance.setMaintenanceStart("2019/03/07");
+		maintenance.setMaintenanceEnd("2019/03/07");
+		maintenance.setCost(100.75);
+		maintenance.setSStatus("In progess");
+		maintenance.setScheduleID(scheduleID);
+		maintenance.setMOrderID(morderID);
+		
+		MaintenanceService mService= new MaintenanceService();
+		mService.addMaintenace(maintenance);
+		System.out.println("maintenance added");
 		
 	}
 
