@@ -65,7 +65,9 @@ public class FMSClient {
 		//Add a maintenance
 		String maintenanceID="MN1";
 		
-		addMaintenace(maintenanceID, morderID, scheduleID);
+		//addMaintenace(maintenanceID, morderID, scheduleID);
+		
+		otherMethods(roomID2);
 		
 		
 		
@@ -287,6 +289,11 @@ public class FMSClient {
 		mService.addMaintenace(maintenance);
 		System.out.println("maintenance added");
 		
+	}
+	
+	public static void otherMethods(String roomID2) {
+		MaintenanceService mService=new MaintenanceService();
+		System.out.println("Total Cost of the Facility: " + mService.maintenanceCostForFacility(roomID2));
 	}
 
 }

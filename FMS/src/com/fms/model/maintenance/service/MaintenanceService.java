@@ -1,5 +1,7 @@
 package com.fms.model.maintenance.service;
 
+import java.util.Set;
+
 import com.fms.dal.maintenance.MaintenanceDAO;
 import com.fms.dal.maintenance.MaintenanceOrderDAO;
 import com.fms.dal.maintenance.MaintenanceRequestDAO;
@@ -66,6 +68,22 @@ public class MaintenanceService {
 		      System.err.println("FacilityMaintenanceService: Threw a Exception adding Maintenance Schedule.");
 		      System.err.println(se.getMessage());
 		    }
+	}
+	
+	//Calculate maintenance cost for facility
+	public double maintenanceCostForFacility(String roomID) {
+		double totalCost=0.0;
+		try {
+			Set<MaintenanceRequest> requests = maintenanceRequestDAO.getMRequestsByRoomID(roomID);
+			
+			for(MaintenanceRequest r: requests) {
+				totalCost+=maintenanceDAO.getMaintenanceCost(r.getMorderID());
+			}
+		} catch (Exception se) {
+		      System.err.println("FacilityMaintenanceCostService: Threw a Exception retrieving Facility Maintenance Cost.");
+		      System.err.println(se.getMessage());
+		}
+		return totalCost;
 	}
 	
 

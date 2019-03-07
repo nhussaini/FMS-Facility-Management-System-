@@ -1,6 +1,7 @@
 package com.fms.dal.maintenance;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -40,6 +41,33 @@ public class MaintenanceDAO {
 		}
 		return maintenance;
 		
+	}
+	
+	//get maintenance cost by maintenance ID
+	public double getMaintenanceCost(String mOrderID) {
+		double cost=0.0;
+		Connection connection=DBConnect.getDatabaseConnection();
+		try {
+			Statement selectStatement=connection.createStatement();
+			
+			String selectQuery="SELECT * FROM maintenance WHERE MOrderID='"+mOrderID+"'";
+			
+			ResultSet resultSet=selectStatement.executeQuery(selectQuery);
+			
+			resultSet.next();
+		    cost=resultSet.getDouble("Cost");
+		    
+		    
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return cost;
 	}
 
 }
