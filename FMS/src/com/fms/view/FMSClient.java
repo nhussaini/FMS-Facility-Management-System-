@@ -10,6 +10,7 @@ import com.fms.model.facility.Room;
 import com.fms.model.facility.service.FacilityService;
 import com.fms.model.inspection.Inspection;
 import com.fms.model.inspection.service.InspectionService;
+import com.fms.model.maintenance.MaintenanceOrder;
 import com.fms.model.maintenance.MaintenanceRequest;
 import com.fms.model.maintenance.service.MaintenanceService;
 import com.fms.model.reserveuse.InUse;
@@ -49,6 +50,10 @@ public class FMSClient {
 		String requestID="MR1";
 		
 		Set<MaintenanceRequest> reqsts = addMainReq(requestID, userID, roomID2);
+		
+		//Adding maintenance Order
+		String morderID="MO1";
+		addMaintOrder(morderID, reqsts);
 		
 		
 		
@@ -212,14 +217,25 @@ public class FMSClient {
 		requests.add(request);
 		
 		MaintenanceService mService=new MaintenanceService();
-		mService.addMaintenanceRequest(request);
+		//mService.addMaintenanceRequest(request);
 		
 		System.out.println("MaintenanceRequest added");
 		return requests;
+	}
+	
+	public static void addMaintOrder(String morderID, Set<MaintenanceRequest> requests) {
+		MaintenanceOrder morder=new MaintenanceOrder();
+		morder.setMorderID(morderID);
+		morder.setOrderDate("2019/03/06");
+		morder.setmStatus("filled");
+		morder.setMaintRequests(requests);
 		
+		MaintenanceService mService=new MaintenanceService();
+		//mService.addMaintenanceOrder(morder);
 		
-		
-		
+		for(MaintenanceRequest r:requests) {
+			mService.UpdateRequest(r.getRequestID(),morderID);
+		}
 		
 	}
 

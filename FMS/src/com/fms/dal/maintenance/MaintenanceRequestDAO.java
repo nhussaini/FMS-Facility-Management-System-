@@ -35,5 +35,23 @@ public class MaintenanceRequestDAO {
 		}
 		return maintenanceRequest;
 	}
+	
+	//This method updates the request order id
+	public void updateRequest(String requestID, String morderID) {
+		Connection connection=DBConnect.getDatabaseConnection();
+		try {
+			Statement insertStatement=connection.createStatement();
+			String insertQuery="UPDATE maintenancereq SET MOrderID='"+morderID+"' WHERE RequestID='"+requestID+"'";
+			insertStatement.executeUpdate(insertQuery);
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+	}
 
 }
