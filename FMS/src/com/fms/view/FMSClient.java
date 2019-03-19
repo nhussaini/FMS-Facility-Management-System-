@@ -32,21 +32,21 @@ public class FMSClient {
 		
 		System.out.println("Facility creation started");
 		
-		String facilityID="FA002";
-		String phoneID1="PH003";
-		String phoneID2="PH004";
-		String roomID1="RM003";
-		String roomID2="RM004";
+		String facilityID="FA004";
+		String phoneID1="PH005";
+		String phoneID2="PH006";
+		String roomID1="RM005";
+		String roomID2="RM006";
 		
-		//addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
+		Building building=addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
 		
 		//Making a new user
 		String userID="USR2";
-		User user=addUser(userID, context);
+		//User user=addUser(userID, context);
 		
 		//Adding a new inpsection
-		String inspectionID="IN2";
-		//addInspection(inspectionID,userID,facilityID);
+		String inspectionID="IN3";
+		addInspections(inspectionID,building, context);
 		
 		//Adding Reservation
 		String reserveID="RE1";
@@ -83,7 +83,7 @@ public class FMSClient {
 
 	}
 	
-	private static void addBuilding(String facilityID, String phoneID1, String phoneID2, String roomID1, String roomID2, ApplicationContext context) {
+	private static Building addBuilding(String facilityID, String phoneID1, String phoneID2, String roomID1, String roomID2, ApplicationContext context) {
 		
 		//System.out.println("Building FacilityID instance Creation started...");
 		System.out.println("Building FacilityID instance Creation started using Spring...");
@@ -146,6 +146,7 @@ public class FMSClient {
 		System.out.println("Facility data inserted successfully");
 		
 		//System.out.println("the building is successfully removed? "+fService.removeFacility("FA0001"));
+		return building;
 			
 	}
 	
@@ -167,31 +168,36 @@ public class FMSClient {
 		
 	}
 	
-	private static void addInspection(String inspectionID, String userID, String facilityID) {
+	private static void addInspections(String inspectionID, Building building, ApplicationContext context) {
+		InspectionService inspectionService=(InspectionService) context.getBean("inspectionService");
+		Inspection inspection=inspectionService.getInspection();
+		
 		Set<Inspection> inspections=new HashSet<>();
 		
-		Inspection inspection=new Inspection();
+		//Inspection inspection=new Inspection();
+		Building iBuilding=inspection.getBuilding();
+		iBuilding=building;
 		
 		inspection.setInspectionID(inspectionID);
-		inspection.setDateFrom("2019/04/04");
-		inspection.setDateTo("2019/04/11");
-		inspection.setUserID(userID);
-		inspection.setFacilityID(facilityID);
+		inspection.setDateFrom("2019/03/19");
+		inspection.setDateTo("2019/03/22");
+		inspection.setFacilityID(iBuilding.getFacilityID());
 		inspection.setInspectionType("bathroom");
+		inspection.setBuilding(iBuilding);
+		inspection.setInspectedBy("Ali");
 		
 		inspections.add(inspection);
 		
-		InspectionService iService=new InspectionService();
-		iService.addInspections(inspections);
+		inspectionService.addInspections(inspections);
 		System.out.println("inspection added");
 		
 		//List inspections
-		System.out.println("list of inspections: ");
-		Set<Inspection> listinspections=iService.listInspections();
-		for(Inspection i:listinspections) {
-			System.out.println("InspectionID: "+i.getInspectionID());
-			System.out.println("InpsectionType: "+i.getInspectionType());
-		}
+//		System.out.println("list of inspections: ");
+//		Set<Inspection> listinspections=iService.listInspections();
+//		for(Inspection i:listinspections) {
+//			System.out.println("InspectionID: "+i.getInspectionID());
+//			System.out.println("InpsectionType: "+i.getInspectionType());
+//		}
 		
 	}
 	

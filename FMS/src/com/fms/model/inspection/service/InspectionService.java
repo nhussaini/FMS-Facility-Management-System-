@@ -6,6 +6,16 @@ import com.fms.dal.inspection.InspectionDAO;
 import com.fms.model.inspection.Inspection;
 
 public class InspectionService {
+	private Inspection inspection;
+	
+	public Inspection getInspection() {
+		return inspection;
+	}
+
+	public void setInspection(Inspection inspection) {
+		this.inspection = inspection;
+	}
+
 	private InspectionDAO inspectionDAO=new InspectionDAO();
 	
 	public void addInspections(Set<Inspection> inspections) {
