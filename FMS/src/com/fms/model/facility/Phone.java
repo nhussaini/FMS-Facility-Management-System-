@@ -1,6 +1,6 @@
 package com.fms.model.facility;
 
-public class Phone {
+public class Phone implements IPhone {
 	private String phoneID;
 	private String phoneNumber;
 	private String description;
