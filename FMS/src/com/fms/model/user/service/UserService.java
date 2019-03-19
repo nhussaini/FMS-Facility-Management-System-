@@ -4,7 +4,17 @@ import com.fms.dal.user.UserDAO;
 import com.fms.model.user.User;
 
 public class UserService {
+	private User user;
 	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	private UserDAO userDAO=new UserDAO();
 	
 	//Insert a new user

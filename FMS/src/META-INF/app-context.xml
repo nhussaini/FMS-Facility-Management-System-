@@ -21,8 +21,14 @@
 			</set>
 		</property>
 	</bean>
+	<bean id="user" class="com.fms.model.user.User" scope="prototype">
+		
+	</bean>
 	<bean id="facilityService" class="com.fms.model.facility.service.FacilityService" scope="prototype">
 		<property name="building" ref="building" />
+	</bean>
+	<bean id="userService" class="com.fms.model.user.service.UserService" scope="prototype">
+		<property name="user" ref="user" />
 	</bean>
 	
 </beans>

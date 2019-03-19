@@ -38,11 +38,11 @@ public class FMSClient {
 		String roomID1="RM003";
 		String roomID2="RM004";
 		
-		addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
+		//addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
 		
 		//Making a new user
-		String userID="USR1";
-		//addUser(userID);
+		String userID="USR2";
+		User user=addUser(userID, context);
 		
 		//Adding a new inpsection
 		String inspectionID="IN2";
@@ -149,18 +149,21 @@ public class FMSClient {
 			
 	}
 	
-	private static void addUser(String userID) {
+	private static User addUser(String userID, ApplicationContext context) {
 		System.out.println("Adding a new user");
-		User user=new User();
+		//User user=new User();
+		UserService userService=(UserService) context.getBean("userService");
+		User user=userService.getUser();
 		
 		user.setUserID(userID);
-		user.setName("Nasr");
-		user.setPhoneNumber("12345");
+		user.setName("Mohd");
+		user.setPhoneNumber("5555");
 		user.setAddress("1219 W Columbia Ave");
-		user.setTypeOfUser("Employee");
+		user.setTypeOfUser("Manager");
 		
-		UserService userService=new UserService();
+		//UserService userService=new UserService();
 		userService.addUser(user);
+		return user;
 		
 	}
 	
