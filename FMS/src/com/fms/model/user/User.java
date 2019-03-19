@@ -1,12 +1,29 @@
 package com.fms.model.user;
 
-public class User {
-	public String userID;
-	public String Name;
-	public String phoneNumber;
-	public String address;
-	public String typeOfUser;
+import com.fms.model.maintenance.MaintenanceRequest;
+import com.fms.model.reserveuse.Reserve;
+
+public class User implements UserI{
+	private String userID;
+	private String Name;
+	private String phoneNumber;
+	private String address;
+	private String typeOfUser;
+	private Reserve reserve;
+	private MaintenanceRequest maintenanceRequest;
 	
+	public Reserve getReserve() {
+		return reserve;
+	}
+	public void setReserve(Reserve reserve) {
+		this.reserve = reserve;
+	}
+	public MaintenanceRequest getMaintenanceRequest() {
+		return maintenanceRequest;
+	}
+	public void setMaintenanceRequest(MaintenanceRequest maintenanceRequest) {
+		this.maintenanceRequest = maintenanceRequest;
+	}
 	public String getUserID() {
 		return userID;
 	}
@@ -37,7 +54,5 @@ public class User {
 	public void setTypeOfUser(String typeOfUser) {
 		this.typeOfUser = typeOfUser;
 	}
-	
-	
 
 }
