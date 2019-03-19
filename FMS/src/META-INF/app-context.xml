@@ -7,4 +7,22 @@
 
 	<description>Wiring the dependencies for the Facility Management Application.</description>
 	<context:component-scan base-package="com.fms" />
+	<bean id="phone" class="com.fms.model.facility.Phone" scope="prototype" />
+	<bean id="room" class="com.fms.model.facility.Room" scope="prototype" />
+	<bean id="building" class="com.fms.model.facility.Building" scope="prototype" >
+		<property name="phones">
+			<set>
+				<ref bean="phone" />
+			</set>
+		</property>
+		<property name="rooms">
+			<set>
+				<ref bean="room" />
+			</set>
+		</property>
+	</bean>
+	<bean id="facilityService" class="com.fms.model.facility.service.FacilityService" scope="prototype">
+		<property name="building" ref="building" />
+	</bean>
+	
 </beans>

@@ -3,6 +3,8 @@ package com.fms.view;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fms.model.facility.Building;
 import com.fms.model.facility.Phone;
@@ -24,15 +26,19 @@ import com.fms.model.user.service.UserService;
 public class FMSClient {
 
 	public static void main(String[] args) {
+		
+		ApplicationContext context=new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		System.out.println("***************** Application Context instantiated! ******************");
+		
 		System.out.println("Facility creation started");
 		
-		String facilityID="FA001";
-		String phoneID1="PH001";
-		String phoneID2="PH002";
-		String roomID1="RM001";
-		String roomID2="RM002";
+		String facilityID="FA002";
+		String phoneID1="PH003";
+		String phoneID2="PH004";
+		String roomID1="RM003";
+		String roomID2="RM004";
 		
-		//addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2);
+		addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
 		
 		//Making a new user
 		String userID="USR1";
@@ -46,12 +52,12 @@ public class FMSClient {
 		String reserveID="RE1";
 		String usageID="US1";
 		
-		addReservationUse(reserveID,userID,roomID2,usageID);
+		//addReservationUse(reserveID,userID,roomID2,usageID);
 		
 		//Adding maintenanceRequest
 		String requestID="MR1";
 		
-		Set<MaintenanceRequest> reqsts = addMainReq(requestID, userID, roomID2);
+		//Set<MaintenanceRequest> reqsts = addMainReq(requestID, userID, roomID2);
 		
 		//Adding maintenance Order
 		String morderID="MO1";
@@ -67,7 +73,7 @@ public class FMSClient {
 		
 		//addMaintenace(maintenanceID, morderID, scheduleID);
 		
-		otherMethods(roomID2);
+		//otherMethods(roomID2);
 		
 		
 		
@@ -77,35 +83,39 @@ public class FMSClient {
 
 	}
 	
-	private static void addBuilding(String facilityID, String phoneID1, String phoneID2, String roomID1, String roomID2) {
+	private static void addBuilding(String facilityID, String phoneID1, String phoneID2, String roomID1, String roomID2, ApplicationContext context) {
 		
-		System.out.println("Building FacilityID instance Creation started...");
+		//System.out.println("Building FacilityID instance Creation started...");
+		System.out.println("Building FacilityID instance Creation started using Spring...");
+		FacilityService facilityService=(FacilityService) context.getBean("facilityService");
 		//create a facility
-		Building building=new Building();
+		//Building building=new Building();
+		Building building=facilityService.getBuilding();
 		
 		building.setFacilityID(facilityID);
 		building.setFacilityName("Branch");
-		building.setAddress("1804 South Ave.");
-		building.setCity("Wheathon");
+		building.setAddress("1219 W Columbia Ave");
+		building.setCity("Chicago");
 		building.setState("IL");
 		building.setZipCode("60603");
 		building.setType("Office");
-		building.setCapacity(20);
+		building.setCapacity(22);
 		
 		//create facility phoneNumber
 		
 		Set<Phone> phones=new HashSet<>();
-		Phone phone=new Phone();
+		//Phone phone=new Phone();
+		Phone phone=(Phone) context.getBean("phone");
 		phone.setPhoneID(phoneID1);
 		phone.setDescription("VP office phone number");
-		phone.setPhoneNumber("123");
+		phone.setPhoneNumber("111");
 		phone.setFacilityID(building.getFacilityID());
 		phones.add(phone);
 		
 		phone=new Phone();
 		phone.setPhoneID(phoneID2);
-		phone.setDescription("Reception phone number");
-		phone.setPhoneNumber("456");
+		phone.setDescription("Secretary phone number");
+		phone.setPhoneNumber("222");
 		phone.setFacilityID(building.getFacilityID());
 		phones.add(phone);
 		
@@ -115,9 +125,10 @@ public class FMSClient {
 		
 		//create rooms inside the building
 		Set<Room> rooms=new HashSet<>();
-		Room room=new Room();
+		//Room room=new Room();
+		Room room= (Room) context.getBean("room");
 		room.setRoomID(roomID1);
-		room.setType("Conference");
+		room.setType("Seminar");
 		room.setFacilityID(building.getFacilityID());
 		rooms.add(room);
 		
@@ -129,12 +140,12 @@ public class FMSClient {
 		building.setRooms(rooms);
 		System.out.println("Building rooms created");
 		
-		FacilityService fService=new FacilityService();
-		fService.addBuilding(building);
+		//FacilityService fService=new FacilityService();
+		facilityService.addBuilding(building);
 		
 		System.out.println("Facility data inserted successfully");
 		
-		System.out.println("the building is successfully removed? "+fService.removeFacility("FA0001"));
+		//System.out.println("the building is successfully removed? "+fService.removeFacility("FA0001"));
 			
 	}
 	
