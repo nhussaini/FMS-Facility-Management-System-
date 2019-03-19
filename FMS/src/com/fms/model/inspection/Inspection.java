@@ -1,13 +1,28 @@
 package com.fms.model.inspection;
 
-public class Inspection {
+import com.fms.model.facility.Building;
+
+public class Inspection implements IInspection {
 	private String inspectionID;
 	private String dateFrom;
 	private String dateTo;
 	private String inspectionType;
 	private String facilityID;
-	private String userID;
+	private String inspectedBy;
+	private Building building;
 	
+	public String getInspectedBy() {
+		return inspectedBy;
+	}
+	public void setInspectedBy(String inspectedBy) {
+		this.inspectedBy = inspectedBy;
+	}
+	public Building getBuilding() {
+		return building;
+	}
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
 	public String getInspectionID() {
 		return inspectionID;
 	}
@@ -38,12 +53,7 @@ public class Inspection {
 	public void setFacilityID(String facilityID) {
 		this.facilityID = facilityID;
 	}
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
+	
 	
 	
 	
