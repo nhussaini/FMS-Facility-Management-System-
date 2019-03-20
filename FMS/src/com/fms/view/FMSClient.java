@@ -32,11 +32,11 @@ public class FMSClient {
 		
 		System.out.println("Facility creation started");
 		
-		String facilityID="FA004";
-		String phoneID1="PH005";
-		String phoneID2="PH006";
-		String roomID1="RM005";
-		String roomID2="RM006";
+		String facilityID="FA005";
+		String phoneID1="PH007";
+		String phoneID2="PH008";
+		String roomID1="RM007";
+		String roomID2="RM008";
 		
 		Building building=addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
 		
@@ -46,7 +46,7 @@ public class FMSClient {
 		
 		//Adding a new inpsection
 		String inspectionID="IN3";
-		addInspections(inspectionID,building, context);
+		//addInspections(inspectionID,building, context);
 		
 		//Adding Reservation
 		String reserveID="RE1";
@@ -93,13 +93,13 @@ public class FMSClient {
 		Building building=facilityService.getBuilding();
 		
 		building.setFacilityID(facilityID);
-		building.setFacilityName("Branch");
+		building.setFacilityName("Main branch");
 		building.setAddress("1219 W Columbia Ave");
 		building.setCity("Chicago");
 		building.setState("IL");
 		building.setZipCode("60603");
 		building.setType("Office");
-		building.setCapacity(22);
+		building.setCapacity(50);
 		
 		//create facility phoneNumber
 		
@@ -107,16 +107,14 @@ public class FMSClient {
 		//Phone phone=new Phone();
 		Phone phone=(Phone) context.getBean("phone");
 		phone.setPhoneID(phoneID1);
-		phone.setDescription("VP office phone number");
+		phone.setDescription("IT Room No.");
 		phone.setPhoneNumber("111");
-		phone.setFacilityID(building.getFacilityID());
 		phones.add(phone);
 		
 		phone=new Phone();
 		phone.setPhoneID(phoneID2);
-		phone.setDescription("Secretary phone number");
+		phone.setDescription("Kitchen No.");
 		phone.setPhoneNumber("222");
-		phone.setFacilityID(building.getFacilityID());
 		phones.add(phone);
 		
 		building.setPhones(phones);
@@ -129,13 +127,11 @@ public class FMSClient {
 		Room room= (Room) context.getBean("room");
 		room.setRoomID(roomID1);
 		room.setType("Seminar");
-		room.setFacilityID(building.getFacilityID());
 		rooms.add(room);
 		
 		room=new Room();
 		room.setRoomID(roomID2);
 		room.setType("Training room");
-		room.setFacilityID(building.getFacilityID());
 		rooms.add(room);
 		building.setRooms(rooms);
 		System.out.println("Building rooms created");

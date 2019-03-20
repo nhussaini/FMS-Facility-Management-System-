@@ -7,8 +7,7 @@ public interface IPhone {
 	public void setPhoneNumber(String phoneNumber);
 	public String getDescription();
 	public void setDescription(String description);
-	public String getFacilityID();
-	public void setFacilityID(String facilityID);
+
 	
 
 }

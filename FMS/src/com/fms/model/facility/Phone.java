@@ -4,7 +4,7 @@ public class Phone implements IPhone {
 	private String phoneID;
 	private String phoneNumber;
 	private String description;
-	private String facilityID;
+	
 	public String getPhoneID() {
 		return phoneID;
 	}
@@ -23,12 +23,7 @@ public class Phone implements IPhone {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getFacilityID() {
-		return facilityID;
-	}
-	public void setFacilityID(String facilityID) {
-		this.facilityID = facilityID;
-	}
+	
 	
 	
 

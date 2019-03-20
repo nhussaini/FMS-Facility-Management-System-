@@ -39,8 +39,8 @@ public class BuildingDAO {
 					 +"VALUES('"+facilityID+"','"+facilityName+"','"+address+"','"+city+"','"+state+"','"+zipCode+"','"+type+"','"+capacity+"')";
 			 insertStatement.executeUpdate(insertQuery);
 			 
-			 phoneDAO.insertPhoneInfos(building.getPhones());
-			 roomDAO.insertRoomInfos(building.getRooms());
+			 phoneDAO.insertPhoneInfos(building.getPhones(),facilityID);
+			 roomDAO.insertRoomInfos(building.getRooms(),facilityID);
 			 
 			 
 			 

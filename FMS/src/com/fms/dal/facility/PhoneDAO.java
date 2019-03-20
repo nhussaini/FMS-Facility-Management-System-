@@ -11,7 +11,7 @@ import com.fms.model.facility.Phone;
 
 public class PhoneDAO {
 	
-	public Set<Phone> insertPhoneInfos(Set<Phone> phones){
+	public Set<Phone> insertPhoneInfos(Set<Phone> phones, String facilityID){
 		Connection connection=DBConnect.getDatabaseConnection();
 		try {
 			
@@ -21,7 +21,7 @@ public class PhoneDAO {
 		while(phoneIterator.hasNext()) {
 			Phone currentPhone=phoneIterator.next();
 			String insertQury="INSERT INTO phone(PhoneID, PhoneNumber,Description,FacilityID)"
-					+"VALUES('"+currentPhone.getPhoneID()+"','"+currentPhone.getPhoneNumber()+"','"+currentPhone.getDescription()+"','"+currentPhone.getFacilityID()+"')";
+					+"VALUES('"+currentPhone.getPhoneID()+"','"+currentPhone.getPhoneNumber()+"','"+currentPhone.getDescription()+"','"+facilityID+"')";
 		insertStatement.executeUpdate(insertQury);  
 			}
 		

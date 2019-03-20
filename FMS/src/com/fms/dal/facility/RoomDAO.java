@@ -11,7 +11,7 @@ import com.fms.model.facility.Room;
 
 public class RoomDAO {
 	
-	public Set<Room> insertRoomInfos(Set<Room> rooms){
+	public Set<Room> insertRoomInfos(Set<Room> rooms,String facilityID){
 		Connection connection=DBConnect.getDatabaseConnection();
 		
 		try {
@@ -22,7 +22,7 @@ public class RoomDAO {
 				Room currentRoom=roomIterator.next();
 				
 				String insertQuery="INSERT INTO room(RoomID,RoomType,FacilityID)"
-						+"VALUES('"+currentRoom.getRoomID()+"','"+currentRoom.getType()+"','"+currentRoom.getFacilityID()+"')";
+						+"VALUES('"+currentRoom.getRoomID()+"','"+currentRoom.getType()+"','"+facilityID+"')";
 				insertStatement.executeUpdate(insertQuery);
 				
 			}
