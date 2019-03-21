@@ -16,9 +16,7 @@ public class ReserveDAO {
 		reserve.setReserveID(reserveID);
 		reserve.setDateFrom(dateFrom);
 		reserve.setDateTo(dateTo);
-		reserve.setUserID(userID);
 		reserve.setrStatus(rStatus);
-		reserve.setRoomID(roomID);
 		
 		Connection connection=DBConnect.getDatabaseConnection();
 		try{

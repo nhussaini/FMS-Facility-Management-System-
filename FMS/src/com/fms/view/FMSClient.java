@@ -32,27 +32,27 @@ public class FMSClient {
 		
 		System.out.println("Facility creation started");
 		
-		String facilityID="FA005";
-		String phoneID1="PH007";
-		String phoneID2="PH008";
-		String roomID1="RM007";
-		String roomID2="RM008";
+		String facilityID="FA006";
+		String phoneID1="PH009";
+		String phoneID2="PH010";
+		String roomID1="RM009";
+		String roomID2="RM010";
 		
-		Building building=addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
+		//Building building=addBuilding(facilityID,phoneID1,phoneID2,roomID1,roomID2, context);
 		
 		//Making a new user
-		String userID="USR2";
-		//User user=addUser(userID, context);
+		String userID="USR3";
+		User user=addUser(userID, context);
 		
 		//Adding a new inpsection
-		String inspectionID="IN3";
+		String inspectionID="IN4";
 		//addInspections(inspectionID,building, context);
 		
 		//Adding Reservation
-		String reserveID="RE1";
-		String usageID="US1";
+		String reserveID="RE2";
+		String usageID="US2";
 		
-		//addReservationUse(reserveID,userID,roomID2,usageID);
+		addReservationUse(reserveID,user,roomID2,usageID);
 		
 		//Adding maintenanceRequest
 		String requestID="MR1";
@@ -177,10 +177,9 @@ public class FMSClient {
 		inspection.setInspectionID(inspectionID);
 		inspection.setDateFrom("2019/03/19");
 		inspection.setDateTo("2019/03/22");
-		inspection.setFacilityID(iBuilding.getFacilityID());
-		inspection.setInspectionType("bathroom");
+		inspection.setInspectionType("basement");
 		inspection.setBuilding(iBuilding);
-		inspection.setInspectedBy("Ali");
+		inspection.setInspectedBy("Ali Corp.");
 		
 		inspections.add(inspection);
 		
@@ -198,28 +197,28 @@ public class FMSClient {
 	}
 	
 	//Adding a reservation
-	private static void addReservationUse(String reserveID,String userID,String roomID2,String usageID) {
-		//Reserve reserve=new Reserve();
+	private static void addReservationUse(String reserveID,User user,String roomID2,String usageID) {
+		Reserve reserve=user.getReserve();
 		
-		//reserve.setReserveID(reserveID);
-		//reserve.setDateFrom("2019/04/05");
-		//reserve.setDateTo("2019/04/10");
-		//reserve.setUserID(userID);
-		//reserve.setRoomID(roomID2);
-		//reserve.setrStatus("reserved");
+		reserve.setReserveID(reserveID);
+		reserve.setDateFrom("2019/03/20");
+		reserve.setDateTo("2019/03/25");
+		reserve.setrStatus("reserved");
 		
 		ReserveuseService ruService=new ReserveuseService();
-		//ruService.addReservation(reserve);
+		FacilityService fService=new FacilityService();
+		Room room=fService.getRoomByID(roomID2);
+		ruService.addReservation(reserve,user, room);
 		
-		//InUse inUse=new InUse();
+		InUse inUse=reserve.getInUse();
 		
-		//inUse.setUsageID(usageID);
+		inUse.setUsageID(usageID);
 		//inUse.setReserveID(reserveID);
 		//inUse.setRoomID(roomID2);
 		//inUse.setUserID(userID);
-		//inUse.setrStatus("occupied");
-		//inUse.setUsedInInterval(0);
-		//ruService.assingFacilityToUse(inUse);
+		inUse.setrStatus("occupied");
+		inUse.setUsedInInterval(0);
+		ruService.assingFacilityToUse(inUse,reserve,user,room);
 		//System.out.println("Reserve and Use happened");
 		
 		System.out.println("Facility Used In Interval: 0-false 1-true ");
@@ -228,8 +227,8 @@ public class FMSClient {
 		System.out.println("Facility Actual Usage: UsageIS's ");
 		System.out.println(ruService.getActualFacilityUsage(roomID2).getUsageID());
 		
-		System.out.println("facility vacated");
-		ruService.vacateFacility(roomID2);
+		//System.out.println("facility vacated");
+		//ruService.vacateFacility(roomID2);
 		
 	}
 	

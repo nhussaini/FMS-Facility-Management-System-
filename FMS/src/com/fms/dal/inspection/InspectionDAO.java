@@ -25,7 +25,7 @@ public class InspectionDAO {
 				Inspection currentInspection=inspectionIterator.next();
 				
 				String insertQuery="INSERT INTO inspection(InspectionID,DateFrom,DateTo,FacilityID,InspectionType,InspectedBy)"
-						+"VALUES('"+currentInspection.getInspectionID()+"','"+currentInspection.getDateFrom()+"','"+currentInspection.getDateTo()+"','"+currentInspection.getFacilityID()+"','"+currentInspection.getInspectionType()+"','"+currentInspection.getInspectedBy()+"')";
+						+"VALUES('"+currentInspection.getInspectionID()+"','"+currentInspection.getDateFrom()+"','"+currentInspection.getDateTo()+"','"+currentInspection.getBuilding().getFacilityID()+"','"+currentInspection.getInspectionType()+"','"+currentInspection.getInspectedBy()+"')";
 				insertStatement.executeUpdate(insertQuery);
 			}
 			
@@ -57,7 +57,6 @@ public class InspectionDAO {
 				String inspectionID=resultSet.getString("InspectionID");
 				String dateFrom=resultSet.getString("DateFrom");
 				String dateTo=resultSet.getString("DateTo");
-				String facilityID=resultSet.getString("FacilityID");
 				String inspectionType=resultSet.getString("InspectionType");
 				String inspectedBy=resultSet.getString("InspectedBy");
 				
@@ -66,7 +65,6 @@ public class InspectionDAO {
 				inspection.setInspectionID(inspectionID);
 				inspection.setDateFrom(dateFrom);
 				inspection.setDateTo(dateTo);
-				inspection.setFacilityID(facilityID);
 				inspection.setInspectionType(inspectionType);
 				inspection.setInspectedBy(inspectedBy);
 				

@@ -7,7 +7,6 @@ public class Inspection implements IInspection {
 	private String dateFrom;
 	private String dateTo;
 	private String inspectionType;
-	private String facilityID;
 	private String inspectedBy;
 	private Building building;
 	
@@ -47,12 +46,7 @@ public class Inspection implements IInspection {
 	public void setInspectionType(String inspectionType) {
 		this.inspectionType = inspectionType;
 	}
-	public String getFacilityID() {
-		return facilityID;
-	}
-	public void setFacilityID(String facilityID) {
-		this.facilityID = facilityID;
-	}
+	
 	
 	
 	

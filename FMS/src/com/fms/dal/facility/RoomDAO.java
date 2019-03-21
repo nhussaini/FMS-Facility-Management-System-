@@ -1,6 +1,7 @@
 package com.fms.dal.facility;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
@@ -57,5 +58,37 @@ public class RoomDAO {
 			}
 		}
 	}
+	//Get room by RoomID
+	
+			public Room getRoomByID(String rid) {
+				
+				Connection connection = DBConnect.getDatabaseConnection();
+				Room room = new Room();
+				try {
+					Statement selectStatement = connection.createStatement();
+					
+					String selectQuery = "SELECT * from room WHERE RoomID='"+rid+"'";
+					ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+					
+					while(resultSet.next()) {
+						String roomID= resultSet.getString("RoomID");
+						String type = resultSet.getString("RoomType");
+						
+						room.setRoomID(roomID);
+						room.setType(type);
+					}
+					
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}finally {
+					if(connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException e) {}
+					}
+				}
+				
+				return room;
+			}
 
 }

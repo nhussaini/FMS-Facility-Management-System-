@@ -1,14 +1,29 @@
 package com.fms.model.reserveuse;
 
-public class Reserve {
+import com.fms.model.facility.Room;
+
+public class Reserve implements IReserve {
 	
 	private String reserveID;
 	private String dateFrom;
 	private String dateTo;
-	private String userID;
 	private String rStatus;
-	private String roomID;
+	private Room room;
+	private InUse inUse;
 	
+	
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+	public InUse getInUse() {
+		return inUse;
+	}
+	public void setInUse(InUse inUse) {
+		this.inUse = inUse;
+	}
 	public String getReserveID() {
 		return reserveID;
 	}
@@ -27,24 +42,14 @@ public class Reserve {
 	public void setDateTo(String dateTo) {
 		this.dateTo = dateTo;
 	}
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
+
 	public String getrStatus() {
 		return rStatus;
 	}
 	public void setrStatus(String rStatus) {
 		this.rStatus = rStatus;
 	}
-	public String getRoomID() {
-		return roomID;
-	}
-	public void setRoomID(String roomID) {
-		this.roomID = roomID;
-	}
+
 	
 	
 	

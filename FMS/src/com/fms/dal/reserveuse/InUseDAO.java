@@ -16,9 +16,6 @@ public class InUseDAO {
 		
 		inUse.setUsageID(usageID);
 		inUse.setrStatus(rStatus);
-		inUse.setReserveID(reserveID);
-		inUse.setRoomID(roomID);
-		inUse.setUserID(userID);
 		inUse.setUsedInInterval(usedInInterval);
 		
 		Connection connection=DBConnect.getDatabaseConnection();
@@ -66,9 +63,7 @@ public class InUseDAO {
 	public InUse getActualFacilityUsage(String rid) {
 		String usageID="";
 		String rStatus="";
-		String reserveID="";
-		String roomID=rid;
-		String userID="";
+		
 		int usedInInterval=0;
 		
 		Connection connection=DBConnect.getDatabaseConnection();
@@ -80,8 +75,6 @@ public class InUseDAO {
 			
 			usageID=resultSet.getString("UsageID");
 			rStatus=resultSet.getString("Rstatus");
-			reserveID=resultSet.getString("ReserveID");
-			userID=resultSet.getString("UserID");
 			usedInInterval=resultSet.getInt("UsedInInterval");
 		}catch(SQLException se) {
 			se.printStackTrace();
@@ -97,9 +90,7 @@ public class InUseDAO {
 		
 		inUse.setUsageID(usageID);
 		inUse.setrStatus(rStatus);
-		inUse.setReserveID(reserveID);
-		inUse.setRoomID(roomID);
-		inUse.setUserID(userID);
+		
 		inUse.setUsedInInterval(usedInInterval);
 		
 		return inUse;

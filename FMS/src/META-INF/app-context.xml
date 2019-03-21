@@ -22,10 +22,18 @@
 		</property>
 	</bean>
 	<bean id="user" class="com.fms.model.user.User" scope="prototype">
+		<property name="reserve" ref="reserve"></property>
 		
 	</bean>
 	<bean id="inspection" class="com.fms.model.inspection.Inspection" scope="prototype">
 		<property name="building" ref="building" />
+	</bean>
+	<bean id="reserve" class="com.fms.model.reserveuse.Reserve">
+		<property name="inUse" ref="inUse" />
+		<property name="room"  ref="room"/>
+	</bean>
+	<bean id="inUse" class="com.fms.model.reserveuse.InUse">
+		<property name="room" ref="room" />
 	</bean>
 	<bean id="facilityService" class="com.fms.model.facility.service.FacilityService" scope="prototype">
 		<property name="building" ref="building" />

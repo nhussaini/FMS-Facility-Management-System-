@@ -1,13 +1,19 @@
 package com.fms.model.reserveuse;
 
-public class InUse {
+import com.fms.model.facility.Room;
+
+public class InUse implements IInUse{
 	private String usageID;
 	private String rStatus;
-	private String reserveID;
-	private String roomID;
-	private String userID;
 	private int usedInInterval;
+	private Room room;
 	
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 	public String getUsageID() {
 		return usageID;
 	}
@@ -19,24 +25,6 @@ public class InUse {
 	}
 	public void setrStatus(String rStatus) {
 		this.rStatus = rStatus;
-	}
-	public String getReserveID() {
-		return reserveID;
-	}
-	public void setReserveID(String reserveID) {
-		this.reserveID = reserveID;
-	}
-	public String getRoomID() {
-		return roomID;
-	}
-	public void setRoomID(String roomID) {
-		this.roomID = roomID;
-	}
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
 	}
 	public int getUsedInInterval() {
 		return usedInInterval;
